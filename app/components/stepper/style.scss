@@ -1,0 +1,68 @@
+.stepper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: size(stack) 0;
+
+  @include bp(phone) {
+    flex-direction: column;
+    align-items: initial;
+  }
+}
+
+.stepper::before {
+  content: "";
+  display: block;
+  width: 100%;
+  position: absolute;
+  height: 2px;
+  background-color: var(--c-layout--line);
+  top: 50%;
+  left: 0;
+  z-index: -1;
+
+  @include bp(phone) {
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+  }
+}
+
+.stepper__step {
+  padding: size(bezel);
+  background-color: var(--c-interaction--default-light);
+  color: var(--c-interaction--default);
+  border: 2px solid var(--c-interaction--default-dark);
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stepper__step + .stepper__step {
+  @include bp(phone) {
+    margin-top: size(list-stack);
+  }
+}
+
+.stepper__step--active {
+  color: var(--c-interaction--primary-light);
+  background: var(--c-interaction--primary);
+  border: 2px solid var(--c-interaction--primary);
+  flex-shrink: 0;
+}
+
+.stepper__step--disabled {
+  color: var(--c-interaction--disabled);
+  pointer-events: none;
+  font-weight: inherit;
+}
+
+.stepper__step > * {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

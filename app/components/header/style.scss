@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  margin-top: size(stack);
+
+  @include bp(phone) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.header__info {
+  flex-shrink: 2;
+}
+
+.header__title {
+  @include typo(page-title);
+  margin: 2rem 0 0 0;
+}
+
+.header__subtitle {
+  @include typo(subtitle);
+  margin: 0.25rem 0 0 0;
+}
+
+.header__subtitle + .header__title  {
+  margin: 0;
+}
+
+.header__actions {
+  padding: 0.5rem 0; // Because of line height. TODO: Extract rule
+  flex-shrink: 1;
+
+  @include bp(phone) {
+    width: 100%;
+  }
+}

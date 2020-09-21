@@ -1,0 +1,236 @@
+.button {
+  // Begin style reset
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+  border: 0;
+  // End style reset
+
+  @include typo(form);
+
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  display: inline-flex;
+  text-align: center;
+  border-radius: size(border-radius);
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  padding: size(field-bezel);
+  font-weight: bold;
+  appearance: none;
+  text-decoration: none;
+  user-select: none;
+  cursor: pointer;
+
+  transition: background 0.2s;
+
+  svg {
+    height: 1em;
+    width: 1em;
+  }
+
+  svg + span {
+    margin-left: size(stack);
+  }
+  span + svg {
+    margin-left: size(stack);
+  }
+}
+
+.button--large {}
+.button--medium {}
+.button--small {}
+
+.button--text {
+  -moz-appearance: none;
+
+  background-color: transparent;
+  border-style: none;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: content-box;
+  display: inline;
+  font: inherit;
+  perspective-origin: 0 0;
+  text-align: center;
+  transform-origin: 0 0;
+
+  height: auto;
+  width: auto;
+  -webkit-logical-height: 1em; /* Chrome ignores auto, so we have to use this hack to set the correct height  */
+  -webkit-logical-width: auto; /* Chrome ignores auto, but here for completeness */
+
+  vertical-align: inherit;
+  min-height: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  color: var(--c-interaction--default);
+}
+
+// Enclosed & default style
+.button--enclosed {
+  color: var(--c-interaction--default);
+  background: var(--c-interaction--default-light);
+  border: 2px solid var(--c-interaction--default);
+
+  &:hover {
+    color: var(--c-interaction--default);
+  }
+  svg {
+    fill: var(--c-interaction--default);
+  }
+}
+.button--primary,
+.button--enclosed.button--primary {
+  color: var(--c-interaction--primary-light);
+  background: var(--c-interaction--primary);
+  border-color: var(--c-interaction--primary);
+
+  &:hover {
+    color: var(--c-interaction--primary-light);
+  }
+  svg {
+    fill: var(--c-interaction--primary-light);
+  }
+}
+.button--positive,
+.button--enclosed.button--positive {
+  color: var(--c-interaction--positive-light);
+  background: var(--c-interaction--positive);
+  border-color: var(--c-interaction--positive);
+
+  &:hover {
+    color: var(--c-interaction--positive-light);
+  }
+  svg {
+    fill: var(--c-interaction--positive-light);
+  }
+}
+.button--negative,
+.button--enclosed.button--negative {
+  color: var(--c-interaction--negative-light);
+  background: var(--c-interaction--negative);
+  border-color: var(--c-interaction--negative);
+
+  &:hover {
+    color: var(--c-interaction--negative-light);
+  }
+  svg {
+    fill: var(--c-interaction--negative-light);
+  }
+}
+
+// Exposed style
+.button--exposed {
+  color: var(--c-interaction--default-light);
+  background: var(--c-interaction--default);
+  box-shadow: 0.4rem 0.4rem 1.6rem 0 rgba(var(--c-interaction--default-dark-rgb), 0.3 );
+
+  &:hover {
+    color: var(--c-interaction--default-light);
+  }
+  svg {
+    fill: var(--c-interaction--default-light);
+  }
+}
+.button--exposed.button--primary {
+  color: var(--c-interaction--primary-light);
+  background: var(--c-interaction--primary);
+  box-shadow: 0.4rem 0.4rem 1.6rem 0 rgba(var(--c-interaction--primary-rgb), 0.6 );
+
+  &:hover {
+    color: var(--c-interaction--primary-light);
+  }
+  svg {
+    fill: var(--c-interaction--primary-light);
+  }
+}
+.button--exposed.button--positive {
+  color: var(--c-interaction--positive-light);
+  background: var(--c-interaction--positive);
+  box-shadow: 0.4rem 0.4rem 1.6rem 0 rgba(var(--c-interaction--positive-rgb), 0.6  );
+
+  &:hover {
+    color: var(--c-interaction--positive-light);
+  }
+  svg {
+    fill: var(--c-interaction--positive-light);
+  }
+}
+.button--exposed.button--negative {
+  color: var(--c-interaction--negative-light);
+  background: var(--c-interaction--negative);
+  box-shadow: 0.4rem 0.4rem 1.6rem 0 rgba(var(--c-interaction--negative-rgb), 0.6  );
+
+  &:hover {
+    color: var(--c-interaction--negative-light);
+  }
+  svg {
+    fill: var(--c-interaction--negative-light);
+  }
+}
+
+// Text style
+.button--text {
+  background-color: transparent;
+  border-color: transparent;
+
+  svg {
+    vertical-align: top;
+    height: 1em;
+    width: 1em;
+
+    fill: var(--c-interaction--default);
+  }
+}
+.button--text.button--primary {
+  color: var(--c-interaction--primary);
+
+  svg {
+    fill: var(--c-interaction--primary);
+  }
+}
+.button--text.button--positive {
+  color: var(--c-interaction--positive);
+
+  svg {
+    fill: var(--c-interaction--positive);
+  }
+}
+.button--text.button--negative {
+  color: var(--c-interaction--negative);
+
+  svg {
+    fill: var(--c-interaction--negative);
+  }
+}
+
+.button--disabled {
+  opacity: .5;
+  pointer-events: none;
+}
+
+.button--small {
+  @include typo(button--small);
+  padding: size(field-bezel--small);
+}
+
+.button--large {
+  @include typo(button--large);
+  padding: size(field-bezel--large);
+}
+
+.button--block {
+  display: block;
+}

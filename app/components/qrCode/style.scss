@@ -1,0 +1,11 @@
+.qr-code {
+  overflow: hidden;
+  text-align: center;
+
+  img {
+    object-fit: contain;
+    object-position: 50% 50%;
+    max-height: 30vh;
+    width: 100%;
+  }
+}

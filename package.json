@@ -1,0 +1,17 @@
+{
+  "name": "coffee-chain",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "build": "truffle compile"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.2.0",
+    "@truffle/hdwallet-provider": "^1.0.44",
+    "fs": "^0.0.1-security",
+    "openzeppelin-solidity": "^3.2.0",
+    "truffle-assertions": "^0.9.2"
+  }
+}

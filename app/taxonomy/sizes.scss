@@ -1,0 +1,29 @@
+$sizes: ((
+  'value': 0,
+  'names': ('border-radius')
+), (
+  'value': 2px,
+  'names': ('line')
+), (
+  'value': 0.1rem,
+  'names': ('stack--brush')
+), (
+  'value': 0.6rem,
+  'names': ('bezel--compact', 'stack--compact')
+), (
+  'value': 0.8rem,
+  'names': ('field-bezel--small')
+), (
+  'value': 1rem,
+  'names': ('bezel', 'stack', 'field-bezel', 'grid-gutter-x', 'list-stack', 'card-bezel-x--compact', 'card-bezel-y--compact', 'container-bezel-y'),
+  'isBase': 'true'
+), (
+  'value': 1.4rem,
+  'names': ('card-bezel-x', 'card-bezel-y', 'field-bezel--large', 'navigation-bezel-y')
+), (
+  'value': 2rem,
+  'names': ('container-bezel-x', 'navigation-bezel-x', 'grid-gutter-y')
+), (
+  'value': 4rem,
+  'names': ('section-stack')
+));

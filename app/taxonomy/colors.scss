@@ -1,0 +1,103 @@
+$colors: (
+  // Primary
+  'white-wuzzy': lighten(#c2665d, 58%),
+  'snow': #F9F1F0,
+  'fuzzy-wuzzy': #c2665d,
+  'middle-red-purple': #9b514a,
+  'caput-mortuum': #61332e,
+  'dark-sienna': #261412,
+  // Base
+  'gunmetal': #232937,
+  'sheen-green': #a6db0b,
+  'sheen-green-light': lighten(#a6db0b, 80%),
+  'sheen-green-dark': darken(#a6db0b, 80%),
+  'aureolin': #f6e927,
+  'aureolin-light': lighten(#f6e927, 80%),
+  'aureolin-dark': darken(#f6e927, 80%),
+  'red-pigment': #f52d28,
+  'red-pigment-light': lighten(#f52d28, 80%),
+  'red-pigment-dark': darken(#f52d28, 80%),
+  // shades
+  'white': #fdfaf9,
+  'cultured': #FFF5F0,
+  'unbleached-silk':#f2d4c3,
+  'timberwolf':#d9beaf,
+  'middle-grey':#917f75,
+  'davys-grey':#483f3a,
+  'eerie-black': #181513
+);
+
+$schemes: (
+  'default': (
+    'brand': (
+      'lighter': 'white-wuzzy',
+      'light': 'snow',
+      'default': 'fuzzy-wuzzy',
+      'dark': 'caput-mortuum',
+      'darker': 'dark-sienna',
+    ),
+    'interaction': (
+      'default': 'eerie-black',
+      'default-light': 'white',
+      'default-dark': 'eerie-black',
+      'primary-light': 'brand--lighter',
+      'primary': 'brand--default',
+      'primary-dark': 'brand--darker',
+      'negative-light': 'red-pigment-light',
+      'negative': 'red-pigment',
+      'negative-dark': 'red-pigment-dark',
+      'warning-light': 'aureolin-light',
+      'warning': 'aureolin',
+      'warning-dark': 'aureolin-dark',
+      'positive-light': 'sheen-green-light',
+      'positive': 'sheen-green',
+      'positive-dark': 'sheen-green-dark',
+      'input': 'shade--none',
+      'input-success': 'text--success',
+      'input-error': 'text--error',
+      'inverted': 'shade--none',
+      'disabled': 'text--weak'
+    ),
+    'shade': (
+      'none': 'white',
+      'lighter': 'cultured',
+      'light': 'unbleached-silk',
+      'half': 'timberwolf',
+      'dark': 'middle-grey',
+      'darker': 'davys-grey',
+      'full': 'eerie-black'
+    ),
+    'text': (
+      'default': 'shade--full',
+      'weak': 'shade--dark',
+      'inverted': 'shade--none',
+      'error': 'red-pigment',
+      'warning': 'aureolin',
+      'success': 'sheen-green'
+    ),
+    'icon': (
+      'default': 'shade--half',
+      'default-over': 'interaction--default',
+      'inverted': 'shade--none'
+    ),
+    'layout': (
+      'line': 'shade--half',
+      'table': 'shade--none',
+      'table-head': 'shade--lighter',
+      'table-foot': 'shade--lighter',
+      'table-row-selected': 'shade--lighter',
+      'shadow': 'shade--darker',
+      'backdrop': 'shade--full',
+      'shadow-inverted': 'shade--dark',
+      'background': 'cultured',
+      'paper': 'shade--none',
+      'paper-inverted': 'shade--full'
+    )
+  ),
+  'light': (
+    // Default scheme
+  ),
+  'dark': (
+    // TODO:
+  )
+);

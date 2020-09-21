@@ -1,0 +1,44 @@
+.card {
+  padding: size(card-bezel-y) size(card-bezel-x);
+}
+
+.card--compact {
+  padding: size(card-bezel-y--compact) size(card-bezel-x--compact);
+}
+
+.card--stretch {
+  height: 100%;
+}
+
+.card__header {
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.card__header__title {
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+  text-align: left;
+
+  @include typo(section-title);
+  margin: 0;
+
+  h1 {
+    @include typo(section-title);
+    margin: 0;
+  }
+  h2 {
+    @include typo(subtitle);
+    margin: 0.25rem 0 0 0;
+  }
+}
+
+.card__header__actions {
+  text-align: right;
+}
+
+.card__content {
+  margin-top: size(stack);
+}

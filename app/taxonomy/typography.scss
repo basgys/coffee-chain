@@ -1,0 +1,68 @@
+$dialog-typo: (
+  'desktop': (
+    'default': (
+      'font-size': 1.4rem,
+      'font-family': "'Roboto', sans-serif",
+      'font-weight': 300,
+      'font-style': normal,
+      'line-height': 1.2,
+      'color': var(--c-text--default)
+    ),
+    'button': (
+      'font-size': 1rem,
+      'color': var(--c-text--default)
+    ),
+    'button--large': (
+      'font-size': 1.1rem,
+    ),
+    'button--small': (
+      'font-size': 0.9rem,
+    ),
+    'link': (
+      'color': var(--c-interaction--default)
+    ),
+    'page-title': (
+      'font-family': "'Heebo', sans-serif",
+      'font-size': 3.2rem,
+      'line-height': 1.1,
+      'font-weight': 900
+    ),
+    'title': (
+      'font-family': "'Heebo', sans-serif",
+      'font-size': 1.8rem,
+      'line-height': 1.1,
+      'font-weight': 900
+    ),
+    'subtitle': (
+      'font-family': "'Inter', sans-serif",
+      'font-size': 1.1rem,
+      'line-height': 1.2,
+      'font-weight': 900
+    ),
+    'section-title': (
+      'font-family': "'Heebo', sans-serif",
+      'font-size': 1.2rem,
+      'line-height': 1.2,
+      'font-weight': 900
+    ),
+    'help': (
+      'font-size': 0.75rem
+    ),
+    'form': (
+      'font-size': 1.2rem,
+    ),
+    'code': (
+      'font-family': '"Fira code", "Fira Mono", monospace'
+    )
+  ),
+  'phone': (
+    'default': (
+      'font-size': 1.1rem,
+      'line-height': 1.4
+    ),
+    'title': (
+      'font-size': 1.4rem,
+      'line-height': 1.1
+    )
+  )
+);

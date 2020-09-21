@@ -1,0 +1,23 @@
+.propery-list {
+
+}
+
+.propery-list__title {
+  @include typo(section-title);
+}
+
+.propery-list__item {
+  margin-top: size(list-stack);
+  text-align: left;
+}
+.propery-list__item:first-child {
+  margin-top: 0;
+}
+
+.propery-list__item__label {
+  color: var(--c-text--weak)
+}
+
+.propery-list__item__value {
+  color: var(--c-text--default)
+}

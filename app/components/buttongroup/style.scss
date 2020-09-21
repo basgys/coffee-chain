@@ -1,0 +1,79 @@
+.buttongroup {
+  align-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  @include bp(phone) {
+    flex-direction: column-reverse;
+  }
+}
+
+.buttongroup--right {
+  justify-content: flex-end;
+}
+
+.buttongroup--center {
+  justify-content: center;
+}
+
+.buttongroup--space-between {
+  justify-content: space-between;
+}
+
+.buttongroup--align-start {
+  align-items: start;
+}
+.buttongroup--align-end {
+  align-items: end;
+}
+.buttongroup--align-center {
+  align-items: center;
+}
+.buttongroup--align-baseline {
+  align-items: baseline;
+}
+
+.buttongroup > * {
+  margin: 0;
+
+  @include bp(phone) {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+.buttongroup {
+  margin-top: size(bezel);
+
+  * + * {
+    margin-left: size(bezel);
+
+    @include bp(phone) {
+      margin: 0 0 size(bezel) 0;
+    }
+  }
+}
+
+.buttongroup--variant-collapsed > * {
+  margin-left: 0;
+}
+.buttongroup--variant-spaced > * {
+  margin-left: size(bezel);
+
+  @include bp(phone) {
+    margin-right: 0;
+  }
+}
+
+.buttongroup--no-vertical-space {
+  margin: 0;
+
+  * + * {
+    margin: 0 0 0 size(bezel);
+
+    @include bp(phone) {
+      margin: 0 0 size(bezel) 0;
+    }
+  }
+}

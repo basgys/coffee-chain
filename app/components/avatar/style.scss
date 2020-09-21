@@ -1,0 +1,26 @@
+.avatar {
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+  overflow: hidden;
+  backface-visibility: hidden;
+  padding: 0;
+  user-select: none;
+  border-radius: 50%;
+  border: 0.15rem solid var(--c-interaction--primary);
+  background-color: var(--c-interaction--primary-light);
+  text-align: left;
+
+  max-width: 100%;
+  max-height: 100%;
+  min-height: 1rem;
+  min-width: 1rem;
+
+  & img,
+  & svg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+}

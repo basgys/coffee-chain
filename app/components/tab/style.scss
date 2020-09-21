@@ -1,0 +1,51 @@
+.tab {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+  user-select: none;
+  border-bottom: 2px solid var(--c-layout--line);
+
+  @include bp(phone) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.tab__link {
+  display: block;
+  margin-right: 4rem;
+  padding: 1.2rem 0;
+  color: var(--c-interaction--default);
+  text-transform: uppercase;
+
+  &:last-child {
+    margin-right: 0;
+  }
+  &:hover {
+    color: var(--c-interaction--default-hover);
+  }
+
+  @include bp(phone) {
+    margin-right: 0;
+  }
+}
+
+.tab__link--active {
+  // color: var(--c-text--inverted);
+  // background-color: var(--c-interaction--button-primary);
+  // border-color: var(--c-interaction--button-primary);
+  // border-radius: size(border-radius);
+  font-weight: bold;
+}
+
+.tab__link--disabled {
+  color: var(--c-interaction--disabled);
+  background-color: inherit;
+  border-color: inherit;
+  border-radius: inherit;
+  font-weight: inherit;
+
+  pointer-events: none;
+  cursor: not-allowed;
+}

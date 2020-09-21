@@ -1,0 +1,172 @@
+//   ___   ____  __   _   __    _
+//  | | \ | |_  ( (` | | / /`_ | |\ |
+//  |_|_/ |_|__ _)_) |_| \_\_/ |_| \|
+//   __   _     __  _____  ____  _
+//  ( (` \ \_/ ( (`  | |  | |_  | |\/|
+//  _)_)  |_|  _)_)  |_|  |_|__ |_|  |
+//-----------------------------------------------------------------------------\
+//
+// Everything related to the design-system must happen in this file.
+// All design rules and settings are set within the /design/ folder and are
+// meant to be maintained only in those .json files to guarantee that there is
+// a single source of truth regarding all the design rules.
+//
+// The API between code and visual design is called "design-taxonomy".
+// Taxonomy is the practice and science of classification of things or concepts,
+// including the principles that underlie such classification.
+// We create a common language that is understood by the project team.
+
+// The design system consists of 4 components: breakpoints, colors, sizes and
+// typography. They all come with helper functions and/or mixins.
+
+// breakpoints:
+// .someselector {
+//      display: inline;
+//      @include bp(phone) {
+//          display: block;
+//      }
+// }
+
+// colors:
+// .someselector {
+//      color: c('text--default')
+//      background-color: c(layout--background);
+//      border: 1px solid c(layout--line);
+// }
+
+// sizes:
+// .someselector {
+//     margin-top: size(grid);
+// }
+
+// typography:
+// .someselector {
+//      @include typo(title);
+//      // includes all properties needed for this element
+//      // including breakpoints
+// }
+
+
+//  ___   ___   ____   __    _     ___   ___   _   _     _____  __
+// | |_) | |_) | |_   / /\  | |_/ | |_) / / \ | | | |\ |  | |  ( (`
+// |_|_) |_| \ |_|__ /_/--\ |_| \ |_|   \_\_/ |_| |_| \|  |_|  _)_)
+//-----------------------------------------------------------------------------\
+// setting up basic breakpoints for the project
+
+// import breakpoints from the taxonomy
+@import 'breakpoints.scss';
+
+// setting up basic breakpoint mixin
+@mixin bp($name) {
+    @if map-has-key($dialog-breakpoints, $name) {
+        @media (#{map-get($dialog-breakpoints, $name)}) {
+            @content;
+        }
+    } @else {
+        @error "there is no breakpoint called #{$name}";
+    }
+}
+
+// usage:
+// @bp(phone) {
+//   whatever is different on mobile
+// }
+
+//  __    ___   _     ___   ___   __
+// / /`  / / \ | |   / / \ | |_) ( (`
+// \_\_, \_\_/ |_|__ \_\_/ |_| \ _)_)
+//-----------------------------------------------------------------------------\
+// Colors are organized in palettes, you can not access a named color like "red"
+// you have to know in what context its used. Let's say you need a color inside
+// the logo, you probably want to use the 'brand--primary' color. If contexts
+// are missing, feel free to extend the colors.json file.
+//
+// see https://github.com/meodai/paletter/ for tooling reference
+
+// import all colors from the taxonomy
+@import 'colors.scss';
+
+// imports the SCSS color parsing tools
+@import "./lib/parse-palettes.scss";
+
+// generate palettes from schemes (default, light, and dark)
+$colorSchemes: _buildSchemes($schemes);
+
+// populates the $paletter-colors map with the values from the taxonomy
+$paletter-colors: _parsePalette(map-get($colorSchemes, default));
+$paletter-light-colors: _parsePalette(map-get($colorSchemes, light));
+$paletter-dark-colors: _parsePalette(map-get($colorSchemes, dark));
+
+// adds helper function to return colors
+@import "./lib/color-helper-fn.scss";
+
+// see colors.json for reference
+// usage: color: c('brand--primary');
+
+// Generate CSS variables for colours
+:root {
+    @each $key, $val in flatten($paletter-colors) {
+        --c-#{$key}: #{$val};
+    }
+    @each $key, $val in flatten($paletter-colors) {
+        --c-#{$key}-rgb: #{hexToRGB($val)};
+    }
+
+    @media (prefers-color-scheme: light) {
+        // Override color variables
+        @each $key, $val in flatten($paletter-light-colors) {
+            --c-#{$key}: #{$val};
+        }
+        @each $key, $val in flatten($paletter-light-colors) {
+            --c-#{$key}-rgb: #{hexToRGB($val)};
+        }
+    };
+    @media (prefers-color-scheme: dark) {
+        // Override color variables
+        @each $key, $val in flatten($paletter-dark-colors) {
+            --c-#{$key}: #{$val};
+        }
+        @each $key, $val in flatten($paletter-dark-colors) {
+            --c-#{$key}-rgb: #{hexToRGB($val)};
+        }
+    };
+  }
+
+//  __   _  ____  ____  __
+// ( (` | |  / / | |_  ( (`
+// _)_) |_| /_/_ |_|__ _)_)
+//-----------------------------------------------------------------------------\
+// check https://github.com/meodai/dialog-size for more information about
+// the library
+
+// import all sizes from the taxonomy
+@import 'sizes.scss';
+
+// import the actual library
+@import './lib/dialog-size.scss';
+
+// populate the SCSS map for the sizes() function
+$dialog-sizes: toDialogSizeList($sizes);
+
+// see sizes.json for reference
+// usage: size('huge');
+
+// _____  _     ___   ___   __    ___    __    ___   _     _
+//  | |  \ \_/ | |_) / / \ / /`_ | |_)  / /\  | |_) | |_| \ \_/
+//  |_|   |_|  |_|   \_\_/ \_\_/ |_| \ /_/--\ |_|   |_| |  |_|
+//-----------------------------------------------------------------------------\
+// check https://github.com/meodai/dialog-typography for more information about
+// the library
+
+// import typography from the design-taxonomy
+$dialog-is-fluid: true;
+$dialog-fluid-breakpoint-sizes: (
+  phone: 40rem,
+  tablet: 64rem,
+  desktop: 100rem,
+);
+
+@import 'typography.scss';
+@import './lib/dialog-typography.scss';
+
+// usage: @include typo('title');

@@ -1,0 +1,184 @@
+// This does the same than index.js but in SASS using SASS-Maps
+// you need to have a variable called $colors containing a map of colrors
+// like: $colors: (red; #f00, green: #0f0);
+// and a map containing your palettes: $palettes: (brand: (primary: red));
+
+$separator: '--';
+$modifier: '';
+$defaultColorKey: 'default';
+$parsedPalette: ();
+
+@function contains($list, $var) {
+  @return (false == index($list, $var));
+}
+
+@function _getPaletteKey($palette, $key) {
+    @return #{$palette}#{$separator}#{$key};
+}
+
+/**
+ * Gets color value string and return if its a link to an other palette value
+ * @param {String} value
+ * @return {Boolean}
+ */
+@function _isPaletteLink($value) {
+  @return str-index(#{$value}, unquote($separator)) != null;
+}
+
+/**
+ * parses key passed to the getColor method
+ * @param {String} paletteKey
+ * @return {Object} containing a property with the palette palette and color key
+ */
+@function _parseKey($paletteKey) {
+  $separatorIndex: str-index($paletteKey, $separator);
+  $palette: str-slice(
+    $paletteKey,
+    0,
+    $separatorIndex - 1
+  );
+
+  $val: str-slice(
+    $paletteKey,
+    $separatorIndex + str-length($separator)
+  );
+
+  @return (
+    palette: $palette,
+    color: $val,
+  );
+}
+
+/**
+ * returns a color value from palette
+ * and checks if the palette and color exists
+ *
+ * @param {String} palette name of the palette (property name of this.palette)
+ * @param {String} key name of the color within a palette
+ *                     (property name of this.palette[paletteKey])
+ * @return {String} color value
+ */
+@function _getKeyReference($palettes, $palette, $key) {
+  $paletteRef: ();
+  @if (map-has-key($palettes, $palette)) {
+    $paletteRef: map-get($palettes, $palette);
+  } @else {
+    @error 'no palette called #{$palette} in #{$palettes}';
+  }
+
+  @if (map-has-key($paletteRef, $key)) {
+    @return map-get($paletteRef, $key);
+  } @else {
+    @error 'no color called #{$key} in #{$palette}';
+  }
+}
+
+/**
+ * @param {String} paletteKey typically contains a palette--key string
+ * @param {Array} [callStack=[]] Stores all previous calls to make sure we don't infinite loop
+ * @return {Object} val: color string stored in color object, name: name in color palette
+ */
+@function _getColor($palettes, $paletteKey, $callStack: ()) {
+  @if (contains($callStack, $paletteKey)) {
+    @error 'you have infinite recursion in your palette';
+  }
+
+  $parsedKey: _parseKey($paletteKey);
+
+  $colorKey: _getKeyReference(
+    $palettes,
+    map-get($parsedKey, 'palette'),
+    map-get($parsedKey, 'color')
+  );
+
+  @if (_isPaletteLink($colorKey)) {
+    $stack: append($callStack, $paletteKey);
+    @return _getColor($palettes, $colorKey, $stack);
+  } @else {
+    @return (
+      value: map-get($colors, $colorKey),
+      name: $colorKey,
+    );
+  }
+}
+
+/**
+ * _buildSchemes returns a schemes with colours inherited from default
+ * @param {Object} schemes Schemes
+ * @return {Object} parsed schemes with colours inherited from default
+ */
+
+@function _buildSchemes($schemes) {
+  $defaultPalettes: map-get($schemes, 'default');
+
+  @return (
+    default: $defaultPalettes,
+    light: deep-map-merge($defaultPalettes, map-get($schemes, 'light')),
+    dark: deep-map-merge($defaultPalettes, map-get($schemes, 'dark')),
+  );
+}
+
+/**
+ * remaps all the color names to the actual color value
+ * @param {Object} palettes You palette object
+ * @return {Object} parsed palette with color values instead of links
+ */
+
+@function _parsePalette($palettes) {
+  $parsedPalette: ();
+
+  @each $paletteKey, $palette in $palettes {
+    $values: ();
+
+    @each $key, $val in map-get($palettes, $paletteKey) {
+      $palKey: _getPaletteKey($paletteKey, $key);
+      $colorMap: _getColor($palettes, $palKey);
+      $values: map-merge(
+        $values,
+        (#{$key}: map-get($colorMap, 'value'))
+      );
+    }
+
+    $parsedPalette: map-merge(
+      $parsedPalette,
+      (#{$paletteKey}: $values)
+    );
+  }
+
+  @return $parsedPalette;
+}
+
+@function flatten($map, $prefix: '', $separator: '--') {
+	$result: ();
+	@each $key, $value in $map {
+    $k: prefix($prefix, $key, $separator);
+
+		@if ((type-of($value) == map)) {
+      $result: map-merge($result, flatten($value, $k));
+		}
+		@else {
+			$result: map-merge($result, ($k: $value));
+		}
+	}
+	@return $result;
+}
+
+@function deep-map-merge($parent-map, $child-map) {
+	$result: map-merge((), $parent-map);
+	@each $key, $value in $child-map {
+		@if (not map-has-key($result, $key)) or (type-of(map-get($result, $key)) != type-of($value)) or (not (type-of(map-get($result, $key)) == map and type-of($value) == map)) {
+			$result: map-merge($result, ($key: $value));
+		}
+		@else {
+			$result: map-merge($result, ($key: deep-map-merge(map-get($result, $key), $value)));
+		}
+	}
+	@return $result;
+}
+
+@function prefix($a, $b, $sep) {
+  @if ($a != "") {
+    @return "#{$a}#{$sep}#{$b}";
+  }
+  @return $b
+}

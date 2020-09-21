@@ -1,0 +1,25 @@
+.container {
+  flex-grow: 1;
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: size(container-bezel-y) size(container-bezel-x);
+
+  @include bp(phone) {
+    max-width: 680px;
+  }
+}
+
+.container--tight {
+  flex-grow: 1;
+  margin: 0 auto;
+  max-width: 768px;
+  padding: size(container-bezel-y) size(container-bezel-x);
+
+  @include bp(phone) {
+    max-width: 680px;
+  }
+}
+
+.container--centered {
+  text-align: center;
+}

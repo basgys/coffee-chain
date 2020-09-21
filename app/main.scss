@@ -1,0 +1,177 @@
+/*
+
+                                    _  _____  __    __   __
+                                   | |  | |  / /`  ( (` ( (`
+                                   |_|  |_|  \_\_, _)_) _)_)
+
+
+                                          `-.` '.-'
+                                       `-.    A   .-'.
+                                    `-.    -./_\.-    .-'
+                                        -.  /___\  .-
+                                    `-.   `/__|__\'   .-'.
+                                 `-.    -./.-"^"-.\.-      '
+                                    `-.  / <`(o)*> \  .-'
+                                 .-   .`/__`-...-'__\'   .-
+                                ,...`-./_/____|____\_\.-'.,.
+                                   ,-'    ,` . . ',   `-,
+                               _,-' /____/____.____\____\ `-,_
+                                       ,      |      .
+                                      /     ,.+.,     \
+
+   -<# ITCSS (Inverted Triangle CSS) -> (https://csswizardry.com/2018/11/itcss-and-skillshare/) #>-
+  __________________________________________________________________________________________________
+
+   \---------------------------/------------                          Generic CSS (Low specificity)
+    \                         /  1) Settings (Design)                              Y
+     \-----------------------/---------------- (optional Skin or Theme)            |
+      \                     /    2) Tools                                          |
+       \-------------------/--------------------                                   |
+        \                 /      3) Generic                                        |
+         \---------------/------------------------                                 |
+          \             /        4) Elements                                       |
+           \-----------/----------------------------                               |
+            \         /          5) Objects                                        |
+             \-------/--------------------------------                             |
+              \     /            6) Components                                     |
+               \---/------------------------------------                           |
+                \ /              7) Utilities (Trumps)                             V
+                 V                                                   Explicit CSS (High specificity)
+
+
+  1) Settings:             Global variables, config switches.
+  2) Tools:                Default mixins and functions.
+  3) Generic:              Ground-zero styles (Normalize.css, resets, box-sizing).
+  4) Base:                 Un-classed HTML elements (type selectors).
+  5) Objects:              Cosmetic-free design patterns
+  6) Components:           Designed components, chunks of UI.
+  7) Utilities/Trumps:     Helpers and overrides.
+
+*/
+
+@import 'taxonomy/index.scss';
+
+html {
+  @include typo(default);
+  background-color: var(--c-layout--background);
+}
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+}
+
+body, .app, #__next {
+  height: 100vh;
+  max-height: 100vh;
+  height: -moz-available;
+  height: -webkit-fill-available;
+  height: fill-available;
+  max-height: -moz-available;
+  max-height: -webkit-fill-available;
+  max-height: fill-available;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  &.no-scroll {
+    overflow: hidden;
+  }
+}
+
+@import 'layouts/grid.scss';
+
+/* Box Sizing Reset
+-----------------------------------------------*/
+
+/* All of our custom controls should be what we expect them to be */
+input,
+textarea {
+	-webkit-box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	box-sizing:content-box;
+}
+
+/* These elements are usually rendered a certain way by the browser */
+button,
+input[type=reset],
+input[type=button],
+input[type=submit],
+input[type=checkbox],
+input[type=radio],
+select {
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+/* Global style
+-----------------------------------------------*/
+
+abbr[title] {
+  text-decoration: none;
+  font-weight: inherit;
+}
+
+.success {
+  color: var(--c-text--success);
+}
+.warning {
+  color: var(--c-text--warning);
+}
+.error {
+  color: var(--c-text--error);
+}
+
+a {
+  color: var(--c-interaction--default);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.title {
+  @include typo(title);
+  margin: 0;
+
+  & + .subtitle {
+    margin-top: size(stack--brush);
+  }
+}
+.subtitle {
+  @include typo(subtitle);
+  margin: size(stack) 0 0 0;
+}
+.page-title {
+  @include typo(page-title);
+}
+.help {
+  @include typo(help);
+}
+
+.title,
+.subtitle {
+  word-break: keep-all;
+  white-space: pre-line;
+}
+
+// Portal for full-screen pop ups
+#popper {
+  position: absolute;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: scroll;
+  z-index: 1000;
+}
+
+.displayNone {
+  display: none;
+}
+
+.hidden {
+  visibility: hidden;
+}

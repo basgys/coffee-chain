@@ -1,0 +1,12 @@
+.static-map {
+  max-height: 30vh;
+  overflow: hidden;
+  text-align: center;
+
+  img {
+    object-fit: cover;
+    object-position: 50% 50%;
+    max-height: 30vh;
+    width: 100%;
+  }
+}

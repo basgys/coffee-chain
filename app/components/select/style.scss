@@ -1,0 +1,68 @@
+.select {
+  font-size: 1em;
+  display: block;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+
+  select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    align-items: center;
+    border: 2px solid transparent;
+    box-shadow: none;
+    display: inline-flex;
+    justify-content: flex-start;
+    position: relative;
+    vertical-align: top;
+    cursor: pointer;
+
+    @include typo(form);
+    width: 100%;
+
+    padding-left: size(field-bezel);
+
+    border-radius: size(border-radius);
+    background-color: var(--c-interaction--input);
+    border-color: var(--c-layout--line);
+    color: var(--c-text--default);
+
+    &:not([multiple]) {
+      padding-right: 2.5em;
+    }
+  }
+
+  select.success {
+    border-color: var(--c-interaction--input-success);
+  }
+  select.error {
+    border-color: var(--c-interaction--input-error);
+  }
+
+  &:not(.select--multiple):not(.select--loading)::after {
+    position: absolute;
+    display: block;
+    content: " ";
+
+    border: 3px solid transparent;
+    border-right: 0;
+    border-top: 0;
+    height: .625em;
+    margin-top: -.4375em;
+    pointer-events: none;
+    top: 50%;
+    transform: rotate(-45deg);
+    transform-origin: center;
+    width: .625em;
+
+    border-color: var(--c-interaction--default);
+    right: calc(#{size(bezel)} + 1px + 3px);
+    z-index: 4;
+  }
+}
+
+.select--multiple {
+  select {
+    padding: size(bezel);
+  }
+}

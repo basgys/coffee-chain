@@ -1,0 +1,33 @@
+.textarea {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: 2px solid transparent;
+
+  position: relative;
+  vertical-align: top;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  @include typo(form);
+
+  padding: size(bezel);
+  border-radius: size(border-radius);
+  width: 100%;
+  box-sizing: border-box;
+
+  border-radius: size(border-radius);
+  background-color: var(--c-interaction--input);
+  border-color: var(--c-layout--line);
+  color: var(--c-text--default);
+
+  min-height: 6rem;
+}
+
+.textarea.success {
+  border-color: var(--c-interaction--input-success);
+}
+.textarea.error {
+  border-color: var(--c-interaction--input-error);
+}
